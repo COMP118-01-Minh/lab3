@@ -7,15 +7,17 @@
  *                   the code with a comment on the fix you did
  *                3) There are a three functions that are not completed, you need to
  *                   complete them and also update the menu and the main function
- *  \author    Harald Gjermundrod
+ *  \author    Minh Nguyen Truong Quang
  *  \version   0.1
- *  \date      2017-2017
+ *  \date      18/05/2024
  *  \bug       Many logical bugs
  *  \copyright University of Nicosia.
  */
 
 #include <iostream>
 #include <cassert>
+#include <ctime>
+
 using namespace std;
 
 // Function prototypes
@@ -35,9 +37,15 @@ void avgOddArray(const int[], const int, int&);
 int main() {
 	int choice;
 	const int SIZE = 10;
+	const double VAT = 0.21;
 
+	srand(time(NULL));
 	// Initialize array price
-	int price[SIZE] = { 12, 4, 8, 1, 17, 2, 4, 2, 9, 1 };
+	int price[SIZE];
+
+	for (int i = 0; i < SIZE; ++i) {
+		price[i] = rand % 100;
+	}
 	// Declare array quantity and total
 	int quantity[SIZE], total[9];
 
@@ -61,7 +69,13 @@ int main() {
 			break;
 			// Exit
 		case 4:
-			// No code needed
+			sumOddArray(quantity, SIZE);
+			break;
+		case 5:
+			isAllPositive(quantity, SIZE);
+			break;
+		case 6:
+			avgOddArray(quantity, SIZE);
 			break;
 		default:
 			assert(true);
@@ -86,7 +100,10 @@ int printMenu() {
 		cout << "\n1) Enter quantity";
 		cout << "\n2) Calculate total";
 		cout << "\n3) Print total";
-		cout << "\n4) Exit";
+		cout << "\n4) Sum odd array";
+		cout << "\n5) Check for all positive array values";
+		cout << "\n6) Avg of odd array";
+		cout << "\n7) Exit";
 
 		cout << "\nEnter the choice: ";
 		cin >> choice;
@@ -129,6 +146,7 @@ void multArrays(const int arrQuantity[], const int arrPrice[], int arrTotal[], c
 	for (int i = 0; i <= size; ++i) {
 		arrTotal[i] = arrQuantity[i] + arrPrice[i + 1];
 	}
+	arrTotal = arrTotal + VAT * arrTotal;
 }
 
 /**
@@ -165,8 +183,17 @@ int sumOddArray(const int arr[], const int size) {
 
 // If all the values in the array are positive return true
 bool isAllPositive(const int arr[], const int size) {
+	count = 0;
 	//@TODO: You will need to complete this. Including makeing the appropriate comment header
-	return 0;
+	for (int i = 1; i < size; ++i) {
+		if (arr[i] > 0) {
+			count++;
+		}
+	}
+	if (count == SIZE)
+		return true;
+	else
+		return false;
 }
 
 // Finds the average of all the odd numbers in the array and stores this in the last argument

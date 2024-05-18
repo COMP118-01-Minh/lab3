@@ -7,9 +7,9 @@
  *                   the code with a comment on the fix you did
  *                3) There are a three functions that are not completed, you need to
  *                   complete them and also update the menu and the main function
- *  \author    Harald Gjermundrod
+ *  \author    Minh Nguyen Truong Quang
  *  \version   0.1
- *  \date      2017-2017
+ *  \date      18/5/2024
  *  \bug       Many logical bugs
  *  \copyright University of Nicosia.
  */
@@ -142,8 +142,8 @@ void multArrays(const int arrQuantity[], const int arrPrice[], int arrTotal[], c
 void displayArray(const int arr[], const int size) {
 	// Another bug found here: Must initialize the sum with 0.
 	int sum = 0;
-
-	for (int i = 1; i < size; ++i) {
+	// Another bug found here: For loop must start from 0.
+	for (int i = 0; i < size; ++i) {
 		cout << "\nValue at " << i << ": " << arr[i];
 		sum += arr[i];
 	}
@@ -155,7 +155,7 @@ void displayArray(const int arr[], const int size) {
 int sumOddArray(const int arr[], const int size) {
 	int sum = 0;
 	//@TODO: You will need to complete this. Including makeing the appropriate comment header
-	for (int i = 1; i < size; ++i) {
+	for (int i = 0; i < size; ++i) {
 		if (arr[i] % 2 != 0) {
 			sum += arr[i];
 		}
@@ -165,15 +165,24 @@ int sumOddArray(const int arr[], const int size) {
 
 // If all the values in the array are positive return true
 bool isAllPositive(const int arr[], const int size) {
+	int count = 0;
 	//@TODO: You will need to complete this. Including makeing the appropriate comment header
-	return 0;
+	for (int i = 0; i < size; ++i) {
+		if (arr[i] > 0) {
+			count++;
+		}
+	}
+	if (count == size)
+		return true;
+	else
+		return false;
 }
 
 // Finds the average of all the odd numbers in the array and stores this in the last argument
 void avgOddArray(const int arr[], const int size, int& avgOdd) {
 	int sum = 0;
 	//@TODO: You will need to complete this. Including makeing the appropriate comment header
-	for (int i = 1; i < size; ++i) {
+	for (int i = 0; i < size; ++i) {
 		if (arr[i] % 2 != 0) {
 			sum += arr[i];
 		}
